@@ -1,4 +1,5 @@
 import os
+import subprocess
 from typing import Optional
 
 from fastapi import FastAPI, File, UploadFile
@@ -39,11 +40,11 @@ def cmdi(user_input: str):
     ALLOWLIST = ["hello", "world", "test"]
     if user_input not in ALLOWLIST:
         return {"error": "Invalid command"}
-    cmd = "echo " + user_input + " this should be echoed"
+    cmd = ["echo", user_input, "this should be echoed"]
     print("Started app view")
     for i in range(10):
         print("will echo command")
-        os.system(cmd)
+        subprocess.run(cmd)
         print("about to sleep")
         sleep(3)
         print("done sleeping")
